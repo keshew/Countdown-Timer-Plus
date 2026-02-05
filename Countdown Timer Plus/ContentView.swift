@@ -205,30 +205,7 @@ final class SettingsViewModel: ObservableObject {
     }
 }
 
-import SwiftUI
 
-@main
-struct CountdownApp: App {
-    @StateObject private var listVM = CountdownListViewModel()
-    @StateObject private var settingsVM = SettingsViewModel()
-    
-    var body: some Scene {
-        WindowGroup {
-            RootView()
-                .environmentObject(listVM)
-                .environmentObject(settingsVM)
-                .preferredColorScheme(colorScheme(from: settingsVM.settings.theme))
-        }
-    }
-    
-    private func colorScheme(from theme: AppTheme) -> ColorScheme? {
-        switch theme {
-        case .system: return nil
-        case .light: return .light
-        case .dark: return .dark
-        }
-    }
-}
 
 import SwiftUI
 

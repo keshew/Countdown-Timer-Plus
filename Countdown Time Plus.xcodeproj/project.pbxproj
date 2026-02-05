@@ -6,14 +6,67 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		86AC50CF2F34D4B40010CF62 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 86AC50CE2F34D4B40010CF62 /* FirebaseCore */; };
+		86AC50D12F34D4B40010CF62 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 86AC50D02F34D4B40010CF62 /* FirebaseMessaging */; };
+		86AC50D42F34D4D10010CF62 /* AppsFlyerLib in Frameworks */ = {isa = PBXBuildFile; productRef = 86AC50D32F34D4D10010CF62 /* AppsFlyerLib */; };
+		86AC50FA2F34D6EA0010CF62 /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 86AC50F32F34D6EA0010CF62 /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		86AC51022F34D6F60010CF62 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 86AC51012F34D6F60010CF62 /* FirebaseMessaging */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		86AC50F82F34D6EA0010CF62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 868EAE0E2F28FBDE00C3A479 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 86AC50F22F34D6EA0010CF62;
+			remoteInfo = NotificationService;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		86AC50FF2F34D6EA0010CF62 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				86AC50FA2F34D6EA0010CF62 /* NotificationService.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		868EAE162F28FBDE00C3A479 /* Countdown Time Plus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Countdown Time Plus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		86AC50EB2F34D67B0010CF62 /* Countdown Time Plus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Countdown Time Plus.entitlements"; sourceTree = "<group>"; };
+		86AC50EC2F34D67E0010CF62 /* Countdown-Time-Plus-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Countdown-Time-Plus-Info.plist"; sourceTree = "<group>"; };
+		86AC50F32F34D6EA0010CF62 /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		86AC50FB2F34D6EA0010CF62 /* Exceptions for "NotificationService" folder in "NotificationService" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 86AC50F22F34D6EA0010CF62 /* NotificationService */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		868EAE182F28FBDE00C3A479 /* Countdown Timer Plus */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Countdown Timer Plus";
+			sourceTree = "<group>";
+		};
+		86AC50F42F34D6EA0010CF62 /* NotificationService */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				86AC50FB2F34D6EA0010CF62 /* Exceptions for "NotificationService" folder in "NotificationService" target */,
+			);
+			path = NotificationService;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -23,6 +76,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86AC50D12F34D4B40010CF62 /* FirebaseMessaging in Frameworks */,
+				86AC50CF2F34D4B40010CF62 /* FirebaseCore in Frameworks */,
+				86AC50D42F34D4D10010CF62 /* AppsFlyerLib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		86AC50F02F34D6EA0010CF62 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86AC51022F34D6F60010CF62 /* FirebaseMessaging in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,7 +96,11 @@
 		868EAE0D2F28FBDE00C3A479 = {
 			isa = PBXGroup;
 			children = (
+				86AC50EC2F34D67E0010CF62 /* Countdown-Time-Plus-Info.plist */,
+				86AC50EB2F34D67B0010CF62 /* Countdown Time Plus.entitlements */,
 				868EAE182F28FBDE00C3A479 /* Countdown Timer Plus */,
+				86AC50F42F34D6EA0010CF62 /* NotificationService */,
+				86AC51002F34D6F60010CF62 /* Frameworks */,
 				868EAE172F28FBDE00C3A479 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,8 +109,16 @@
 			isa = PBXGroup;
 			children = (
 				868EAE162F28FBDE00C3A479 /* Countdown Time Plus.app */,
+				86AC50F32F34D6EA0010CF62 /* NotificationService.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		86AC51002F34D6F60010CF62 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -55,20 +131,48 @@
 				868EAE122F28FBDE00C3A479 /* Sources */,
 				868EAE132F28FBDE00C3A479 /* Frameworks */,
 				868EAE142F28FBDE00C3A479 /* Resources */,
+				86AC50FF2F34D6EA0010CF62 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				86AC50F92F34D6EA0010CF62 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				868EAE182F28FBDE00C3A479 /* Countdown Timer Plus */,
 			);
 			name = "Countdown Time Plus";
 			packageProductDependencies = (
+				86AC50CE2F34D4B40010CF62 /* FirebaseCore */,
+				86AC50D02F34D4B40010CF62 /* FirebaseMessaging */,
+				86AC50D32F34D4D10010CF62 /* AppsFlyerLib */,
 			);
 			productName = "Countdown Timer Plus";
 			productReference = 868EAE162F28FBDE00C3A479 /* Countdown Time Plus.app */;
 			productType = "com.apple.product-type.application";
+		};
+		86AC50F22F34D6EA0010CF62 /* NotificationService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 86AC50FC2F34D6EA0010CF62 /* Build configuration list for PBXNativeTarget "NotificationService" */;
+			buildPhases = (
+				86AC50EF2F34D6EA0010CF62 /* Sources */,
+				86AC50F02F34D6EA0010CF62 /* Frameworks */,
+				86AC50F12F34D6EA0010CF62 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				86AC50F42F34D6EA0010CF62 /* NotificationService */,
+			);
+			name = NotificationService;
+			packageProductDependencies = (
+				86AC51012F34D6F60010CF62 /* FirebaseMessaging */,
+			);
+			productName = NotificationService;
+			productReference = 86AC50F32F34D6EA0010CF62 /* NotificationService.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -83,6 +187,9 @@
 					868EAE152F28FBDE00C3A479 = {
 						CreatedOnToolsVersion = 16.2;
 					};
+					86AC50F22F34D6EA0010CF62 = {
+						CreatedOnToolsVersion = 16.2;
+					};
 				};
 			};
 			buildConfigurationList = 868EAE112F28FBDE00C3A479 /* Build configuration list for PBXProject "Countdown Time Plus" */;
@@ -94,18 +201,30 @@
 			);
 			mainGroup = 868EAE0D2F28FBDE00C3A479;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				86AC50CD2F34D4B40010CF62 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				86AC50D22F34D4D10010CF62 /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 868EAE172F28FBDE00C3A479 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				868EAE152F28FBDE00C3A479 /* Countdown Time Plus */,
+				86AC50F22F34D6EA0010CF62 /* NotificationService */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		868EAE142F28FBDE00C3A479 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		86AC50F12F34D6EA0010CF62 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +241,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		86AC50EF2F34D6EA0010CF62 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		86AC50F92F34D6EA0010CF62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 86AC50F22F34D6EA0010CF62 /* NotificationService */;
+			targetProxy = 86AC50F82F34D6EA0010CF62 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		868EAE222F28FBE000C3A479 /* Debug */ = {
@@ -249,12 +383,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Countdown Time Plus.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Countdown Timer Plus/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Countdown Time Plus";
+				INFOPLIST_FILE = "Countdown-Time-Plus-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Frost Time Plus";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera to take photos and record videos.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "We collect usage data to enhance app performance, improve features, and provide a better user experience. Your information remains secure and is not shared with third parties for advertising purposes.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -265,7 +403,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.countdowntimerplus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -283,12 +421,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Countdown Time Plus.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Countdown Timer Plus/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Countdown Time Plus";
+				INFOPLIST_FILE = "Countdown-Time-Plus-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Frost Time Plus";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera to take photos and record videos.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "We collect usage data to enhance app performance, improve features, and provide a better user experience. Your information remains secure and is not shared with third parties for advertising purposes.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -299,7 +441,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.countdowntimerplus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -309,6 +451,66 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		86AC50FD2F34D6EA0010CF62 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = UPL3YLN45T;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NotificationService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.countdowntimerplus.NotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = extensopnprofile;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		86AC50FE2F34D6EA0010CF62 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = UPL3YLN45T;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NotificationService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.countdowntimerplus.NotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = extensopnprofile;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -333,7 +535,58 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		86AC50FC2F34D6EA0010CF62 /* Build configuration list for PBXNativeTarget "NotificationService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				86AC50FD2F34D6EA0010CF62 /* Debug */,
+				86AC50FE2F34D6EA0010CF62 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		86AC50CD2F34D4B40010CF62 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.9.0;
+			};
+		};
+		86AC50D22F34D4D10010CF62 /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppsFlyerSDK/AppsFlyerFramework";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.17.8;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		86AC50CE2F34D4B40010CF62 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 86AC50CD2F34D4B40010CF62 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		86AC50D02F34D4B40010CF62 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 86AC50CD2F34D4B40010CF62 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		86AC50D32F34D4D10010CF62 /* AppsFlyerLib */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 86AC50D22F34D4D10010CF62 /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */;
+			productName = AppsFlyerLib;
+		};
+		86AC51012F34D6F60010CF62 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 86AC50CD2F34D4B40010CF62 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 868EAE0E2F28FBDE00C3A479 /* Project object */;
 }
