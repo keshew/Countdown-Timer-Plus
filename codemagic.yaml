@@ -13,8 +13,8 @@
         APP_STORE_CONNECT_KEY: timer_appkey
         APP_STORE_APPLE_ID: 6758344924
         BUNDLE_ID: "com.app.countdowntimerplus"
-        XCODE_PROJECT: "Countdown Time Plus.xcodeproj"
-        XCODE_SCHEME: "Countdown Time Plus"
+        XCODE_PROJECT: "Frost Time Plus.xcodeproj"
+        XCODE_SCHEME: "Frost Time Plus"
     scripts:
       - name: Set up provisioning profiles settings on Xcode project
         script: xcode-project use-profiles
