@@ -72,8 +72,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, AppsFlyerLibDelegate, Messag
         UNUserNotificationCenter.current().delegate = self
         UIApplication.shared.registerForRemoteNotifications()
         Messaging.messaging().delegate = self
-        AppsFlyerLib.shared().appleAppID = "6757925284"
-        AppsFlyerLib.shared().appsFlyerDevKey = "pzBMd7RMff8iuBTHbQitna"
+        AppsFlyerLib.shared().appleAppID = "6758344924"
+        AppsFlyerLib.shared().appsFlyerDevKey = "V5Fzbaq98b966r6gbcAWAQ"
         AppsFlyerLib.shared().delegate = self
         AppsFlyerLib.shared().deepLinkDelegate = self
         AppsFlyerLib.shared().isDebug = false
