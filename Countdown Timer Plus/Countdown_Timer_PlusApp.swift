@@ -10,6 +10,8 @@ import FirebaseMessaging
 struct CountdownApp: App {
     @StateObject private var listVM = CountdownListViewModel()
     @StateObject private var settingsVM = SettingsViewModel()
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     
     var body: some Scene {
         WindowGroup {
