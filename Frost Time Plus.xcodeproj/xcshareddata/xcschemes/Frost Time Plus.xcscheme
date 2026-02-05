@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "868EAE152F28FBDE00C3A479"
-               BuildableName = "Countdown Time Plus.app"
-               BlueprintName = "Countdown Time Plus"
-               ReferencedContainer = "container:Countdown Time Plus.xcodeproj">
+               BuildableName = "Frost Time Plus.app"
+               BlueprintName = "Frost Time Plus"
+               ReferencedContainer = "container:Frost Time Plus.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "868EAE152F28FBDE00C3A479"
-            BuildableName = "Countdown Time Plus.app"
-            BlueprintName = "Countdown Time Plus"
-            ReferencedContainer = "container:Countdown Time Plus.xcodeproj">
+            BuildableName = "Frost Time Plus.app"
+            BlueprintName = "Frost Time Plus"
+            ReferencedContainer = "container:Frost Time Plus.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "868EAE152F28FBDE00C3A479"
-            BuildableName = "Countdown Time Plus.app"
-            BlueprintName = "Countdown Time Plus"
-            ReferencedContainer = "container:Countdown Time Plus.xcodeproj">
+            BuildableName = "Frost Time Plus.app"
+            BlueprintName = "Frost Time Plus"
+            ReferencedContainer = "container:Frost Time Plus.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

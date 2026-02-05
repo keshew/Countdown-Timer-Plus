@@ -39,7 +39,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		868EAE162F28FBDE00C3A479 /* Countdown Time Plus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Countdown Time Plus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		868EAE162F28FBDE00C3A479 /* Frost Time Plus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Frost Time Plus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86AC50EB2F34D67B0010CF62 /* Countdown Time Plus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Countdown Time Plus.entitlements"; sourceTree = "<group>"; };
 		86AC50EC2F34D67E0010CF62 /* Countdown-Time-Plus-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Countdown-Time-Plus-Info.plist"; sourceTree = "<group>"; };
 		86AC50F32F34D6EA0010CF62 /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,7 +108,7 @@
 		868EAE172F28FBDE00C3A479 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				868EAE162F28FBDE00C3A479 /* Countdown Time Plus.app */,
+				868EAE162F28FBDE00C3A479 /* Frost Time Plus.app */,
 				86AC50F32F34D6EA0010CF62 /* NotificationService.appex */,
 			);
 			name = Products;
@@ -124,9 +124,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		868EAE152F28FBDE00C3A479 /* Countdown Time Plus */ = {
+		868EAE152F28FBDE00C3A479 /* Frost Time Plus */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 868EAE242F28FBE000C3A479 /* Build configuration list for PBXNativeTarget "Countdown Time Plus" */;
+			buildConfigurationList = 868EAE242F28FBE000C3A479 /* Build configuration list for PBXNativeTarget "Frost Time Plus" */;
 			buildPhases = (
 				868EAE122F28FBDE00C3A479 /* Sources */,
 				868EAE132F28FBDE00C3A479 /* Frameworks */,
@@ -141,14 +141,14 @@
 			fileSystemSynchronizedGroups = (
 				868EAE182F28FBDE00C3A479 /* Countdown Timer Plus */,
 			);
-			name = "Countdown Time Plus";
+			name = "Frost Time Plus";
 			packageProductDependencies = (
 				86AC50CE2F34D4B40010CF62 /* FirebaseCore */,
 				86AC50D02F34D4B40010CF62 /* FirebaseMessaging */,
 				86AC50D32F34D4D10010CF62 /* AppsFlyerLib */,
 			);
 			productName = "Countdown Timer Plus";
-			productReference = 868EAE162F28FBDE00C3A479 /* Countdown Time Plus.app */;
+			productReference = 868EAE162F28FBDE00C3A479 /* Frost Time Plus.app */;
 			productType = "com.apple.product-type.application";
 		};
 		86AC50F22F34D6EA0010CF62 /* NotificationService */ = {
@@ -192,7 +192,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 868EAE112F28FBDE00C3A479 /* Build configuration list for PBXProject "Countdown Time Plus" */;
+			buildConfigurationList = 868EAE112F28FBDE00C3A479 /* Build configuration list for PBXProject "Frost Time Plus" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -210,7 +210,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				868EAE152F28FBDE00C3A479 /* Countdown Time Plus */,
+				868EAE152F28FBDE00C3A479 /* Frost Time Plus */,
 				86AC50F22F34D6EA0010CF62 /* NotificationService */,
 			);
 		};
@@ -403,7 +403,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.countdowntimerplus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -441,7 +441,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.countdowntimerplus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -472,7 +472,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.countdowntimerplus.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -502,7 +502,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.countdowntimerplus.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -517,7 +517,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		868EAE112F28FBDE00C3A479 /* Build configuration list for PBXProject "Countdown Time Plus" */ = {
+		868EAE112F28FBDE00C3A479 /* Build configuration list for PBXProject "Frost Time Plus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				868EAE222F28FBE000C3A479 /* Debug */,
@@ -526,7 +526,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		868EAE242F28FBE000C3A479 /* Build configuration list for PBXNativeTarget "Countdown Time Plus" */ = {
+		868EAE242F28FBE000C3A479 /* Build configuration list for PBXNativeTarget "Frost Time Plus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				868EAE252F28FBE000C3A479 /* Debug */,
